@@ -1,0 +1,138 @@
+Feature,Importance
+speed_limit_(km/h),0.13045458463959858
+driver_age,0.062276438413250285
+vehicle_type_Cycle,0.03842044974142367
+traffic_control_presence_Police Checkpost,0.024783714249746045
+time_of_day_Morning,0.02083230007895672
+num_vehicles,0.020638687780333294
+year,0.020257168600267786
+vehicle_type_Pedestrian,0.017189842640558187
+is_weekend_No,0.017053438882713327
+road_type_National Highway,0.0164148157298227
+month_May,0.01605027379831921
+road_condition_Damaged,0.014794327697741312
+weather_Rainy,0.014093286870011754
+time_of_day_Afternoon,0.013873180688998071
+lighting_conditions_Dark,0.013844657299880696
+city_New Delhi,0.013804941013937255
+month_October,0.01369743269480493
+alcohol_involved_Yes,0.0133091181218057
+day_of_week_Thursday,0.012818946170638171
+time_of_day_Evening,0.012809168127103294
+traffic_control_presence_Signs,0.012776237664076255
+lighting_conditions_Daylight,0.012768107861010375
+day_of_week_Friday,0.012566545501075737
+driver_age_group_Adult,0.012540450452790487
+driver_license_status_Valid,0.012310343266871046
+state_Jharkhand,0.01214291817343703
+weather_Clear,0.011794435084501186
+driver_license_status_nan,0.011420533703658675
+traffic_control_presence_Signals,0.011261940696919036
+road_type_Urban Road,0.01123851520094358
+lighting_conditions_Dusk,0.010808199706461371
+state_Puducherry,0.01056950019927362
+state_West Bengal,0.01034477038590179
+day_of_week_Wednesday,0.010323133444159732
+month_November,0.010091388092207198
+month_March,0.010032602148345709
+state_Nagaland,0.009901959039563351
+day_of_week_Monday,0.009823111300043008
+state_Assam,0.009192300142438973
+is_night_Yes,0.00901777007201064
+vehicle_type_Bus,0.008720322551319184
+accident_location_details_Bridge,0.008464804055633579
+state_Rajasthan,0.008214560276964867
+driver_license_status_Expired,0.00806346579341543
+weather_Stormy,0.00781634876312928
+city_Visakhapatnam,0.007791039854033653
+city_Varanasi,0.007764714438399175
+time_of_day_Late Night,0.007537550748708824
+month_April,0.0074831062124167715
+day_of_week_Tuesday,0.0068721668481291865
+accident_location_details_Straight Road,0.006771843244506863
+state_Odisha,0.006621357839073376
+state_Bihar,0.00652939453575291
+city_Unknown,0.006395629730923147
+state_Sikkim,0.006154940082290698
+accident_location_details_Intersection,0.006005735725936394
+accident_location_details_Curve,0.005884365212463223
+traffic_control_presence_nan,0.005855141990819854
+state_Telangana,0.00578064049190822
+state_Goa,0.00574771478264664
+vehicle_type_Car,0.0057063434333082235
+road_condition_Under Construction,0.00560900147524811
+city_Surat,0.005406544148826585
+is_peak_hour_No,0.005304505159593804
+road_type_State Highway,0.005298340316303981
+month_December,0.00521353491488289
+city_Bangalore,0.004923774297546561
+state_Mizoram,0.004882732763669011
+weather_Foggy,0.004675102070847663
+state_Manipur,0.0046649156887098265
+city_Nagpur,0.004342287057332685
+state_Haryana,0.004237681531385795
+state_Chhattisgarh,0.004213591352137605
+city_Mangalore,0.004146527204063984
+state_Gujarat,0.003982488765221905
+city_Lucknow,0.0038148050277388673
+month_August,0.0038148050277388673
+city_Vadodara,0.0037621351358371464
+month_September,0.003734774153031056
+day_of_week_Sunday,0.0036116497304036596
+state_Jammu and Kashmir,0.003418922807655511
+month_February,0.0033859216222534316
+road_condition_Dry,0.0033859216222534316
+state_Chandigarh,0.0033859216222534316
+state_Uttarakhand,0.0033859216222534316
+city_Tirupati,0.0033859216222534316
+is_peak_hour_Yes,0.003324359410939732
+driver_age_group_Young,0.0031601935141032035
+city_Vijayawada,0.0029547230566843922
+city_Madurai,0.0029022185333600833
+driver_gender_Male,0.0026334945950860027
+vehicle_type_Auto-Rickshaw,0.002257281081502288
+driver_gender_Female,0.002257281081502288
+state_Arunachal Pradesh,0.0
+state_Andhra Pradesh,0.0
+state_Karnataka,0.0
+state_Kerala,0.0
+city_Ahmedabad,0.0
+state_Tamil Nadu,0.0
+state_Punjab,0.0
+state_Uttar Pradesh,0.0
+city_Chennai,0.0
+state_Himachal Pradesh,0.0
+state_Delhi,0.0
+state_Maharashtra,0.0
+month_July,0.0
+month_June,0.0
+month_January,0.0
+city_Udaipur,0.0
+city_Mumbai,0.0
+city_Pune,0.0
+city_Kanpur,0.0
+city_Dwarka,0.0
+city_Kolkata,0.0
+city_Jaipur,0.0
+city_Jodhpur,0.0
+city_Mysore,0.0
+city_Rohini,0.0
+city_Siliguri,0.0
+city_Coimbatore,0.0
+city_Durgapur,0.0
+state_Tripura,0.0
+state_Meghalaya,0.0
+state_Madhya Pradesh,0.0
+road_type_Village Road,0.0
+weather_Hazy,0.0
+vehicle_type_Truck,0.0
+day_of_week_Saturday,0.0
+vehicle_type_Two-Wheeler,0.0
+lighting_conditions_Dawn,0.0
+road_condition_Wet,0.0
+alcohol_involved_No,0.0
+driver_age_group_Senior,0.0
+is_weekend_Yes,0.0
+is_multi_vehicle_Yes,0.0
+is_multi_vehicle_No,0.0
+is_night_No,0.0
