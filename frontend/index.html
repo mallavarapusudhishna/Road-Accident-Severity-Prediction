@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Road Accident Severity Predictor</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <h1>Road Accident Severity Predictor</h1>
+        <p class="subtitle">
+          Enter accident details to predict severity (Minor / Serious / Fatal)
+        </p>
+      </header>
+
+      <section class="card" aria-labelledby="form-title">
+        <h2 id="form-title">Accident details</h2>
+
+        <form id="predict-form" class="form">
+          <div class="grid">
+            <label>
+              State
+              <input
+                name="state"
+                type="text"
+                required
+                placeholder="e.g., Maharashtra"
+              />
+            </label>
+
+            <label>
+              City
+              <input
+                name="city"
+                type="text"
+                placeholder="e.g., Pune (optional)"
+              />
+            </label>
+
+            <label>
+              Year
+              <input
+                name="year"
+                type="number"
+                min="2018"
+                max="2030"
+                required
+                value="2019"
+              />
+            </label>
+
+            <label>
+              Month
+              <input
+                name="month"
+                type="text"
+                required
+                placeholder="e.g., January"
+              />
+            </label>
+
+            <label>
+              Day of Week
+              <input
+                name="day_of_week"
+                type="text"
+                required
+                placeholder="e.g., Monday"
+              />
+            </label>
+
+            <label>
+              Time (HH:MM)
+              <input
+                name="time"
+                type="text"
+                required
+                placeholder="e.g., 18:30"
+              />
+            </label>
+
+            <label>
+              Vehicle Type
+              <input
+                name="vehicle_type"
+                type="text"
+                required
+                placeholder="e.g., Two-Wheeler"
+              />
+            </label>
+
+            <label>
+              Driver Age
+              <input
+                name="driver_age"
+                type="number"
+                min="16"
+                max="100"
+                required
+                value="35"
+              />
+            </label>
+
+            <label>
+              Speed Limit (km/h)
+              <input
+                name="speed_limit_kmh"
+                type="number"
+                min="0"
+                required
+                value="60"
+              />
+            </label>
+
+            <label>
+              Alcohol Involved
+              <input
+                name="alcohol_involved"
+                type="text"
+                required
+                placeholder="e.g., Yes"
+              />
+            </label>
+          </div>
+
+          <div class="actions">
+            <button type="submit" id="predict-btn">Predict Severity</button>
+            <button type="button" id="clear-btn" class="secondary">
+              Clear
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section
+        class="card result-card is-hidden"
+        aria-live="polite"
+        id="result-card"
+      >
+        <h2 id="result-heading" class="result-heading">Prediction result</h2>
+
+        <div id="status" class="status" role="status" aria-live="polite"></div>
+
+        <div id="result" class="result" aria-hidden="true">
+          <div class="result-row">
+            <span class="label">Predicted severity</span>
+            <span id="predicted-severity" class="value"></span>
+          </div>
+          <div class="result-row">
+            <span class="label">Confidence</span>
+            <span id="confidence" class="value"></span>
+          </div>
+
+          <div class="divider"></div>
+          <h3>Reason of accident</h3>
+          <p class="muted" id="shap-note">
+            SHAP explanation will appear here after prediction.
+          </p>
+          <div id="shap-container" class="shap-container">
+            <div id="shap-content" class="shap-placeholder">
+              SHAP explanation is not available yet from the backend.
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
