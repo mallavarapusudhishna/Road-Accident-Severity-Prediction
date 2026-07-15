@@ -1,0 +1,39 @@
+name: Deploy to AWS EC2
+
+# Trigger this workflow on every push to the main branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Show which commit triggered this pipeline
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: SSH into EC2, pull latest code, and redeploy with Docker
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            echo "--- Navigating to project directory ---"
+            cd ~/Road-Accident-Severity-Prediction
+
+            echo "--- Pulling latest changes from main branch ---"
+            git pull origin main
+
+            echo "--- Rebuilding and restarting Docker containers ---"
+            sudo docker compose up -d --build
+
+            echo "--- Removing unused Docker images to free up space ---"
+            sudo docker image prune -f
+
+            echo "--- Deployment complete! ---"
