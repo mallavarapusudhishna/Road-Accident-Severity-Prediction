@@ -1,5 +1,0 @@
-- [ ] Gather understanding of current frontend layout (done)
-- [ ] Implement professional UI polish in frontend/styles.css and minor structure tweaks in frontend/index.html
-- [ ] Fix/remove “color change” after API docs by stabilizing result/card/status styling changes and using CSS classes instead of inline display toggles
-- [ ] Ensure SHAP/docs placeholder remains visible (no removal)
-- [ ] Quick manual test: load page, submit valid form, submit invalid form, verify SHAP/docs section stays stable
