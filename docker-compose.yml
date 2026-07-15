@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # The PostgreSQL Database Service
+  db:
+    image: postgres:15-alpine
+    container_name: accident_prediction_db
+    restart: always
+    environment:
+      POSTGRES_USER: accident_user
+      POSTGRES_PASSWORD: securepassword123
+      POSTGRES_DB: accident_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # The FastAPI & Frontend Application Service
+  web:
+    build: .
+    container_name: accident_prediction_web
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      # Tell the Python app to connect to the "db" container
+      POSTGRES_USER: accident_user
+      POSTGRES_PASSWORD: securepassword123
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: accident_db
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:

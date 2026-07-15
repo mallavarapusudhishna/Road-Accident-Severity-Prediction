@@ -1,0 +1,31 @@
+# Git
+.git
+.gitignore
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Jupyter Notebooks (not needed for production)
+notebooks/
+.ipynb_checkpoints
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Backend SQLite DB (don't overwrite or copy local db to image)
+backend/database/*.db
+backend/database/*.sqlite
