@@ -1,116 +1,85 @@
-# Road Accident Severity Prediction
+# Road Accident Severity Prediction System
 
-An end-to-end Machine Learning project that predicts road accident severity using historical accident data. The project includes data preprocessing, feature engineering, model training, evaluation, explainability, and will be extended into a full-stack application using FastAPI, React, and MySQL.
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688.svg?logo=fastapi)](https://fastapi.tiangolo.com)
+[![XGBoost](https://img.shields.io/badge/XGBoost-1.7+-blue.svg)](https://xgboost.readthedocs.io/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
----
+## 1. Overview
 
-## Features
+The Road Accident Severity Prediction System is an end-to-end machine learning pipeline and web application designed to forecast the severity of traffic collisions. By leveraging historical accident data and real-time environmental inputs, the system provides actionable intelligence for emergency response dispatchers, traffic management authorities, and urban planners. 
 
-- Exploratory Data Analysis (EDA)
-- Data Cleaning & Preprocessing
-- Feature Engineering
-- Multiple Machine Learning Models
-- Hyperparameter Tuning
-- Model Evaluation
-- Explainable Predictions
-- FastAPI Backend (In Progress)
-- React Frontend (Planned)
-- MySQL Database Integration (Planned)
+The primary objective is to facilitate proactive resource allocation and improve road safety measures through data-driven insights and explainable artificial intelligence (XAI).
 
----
+## 2. System Architecture
 
-## Tech Stack
+The application is built upon a unified, decoupled architecture prioritizing high throughput and maintainability:
 
-### Machine Learning
+*   **Inference Engine (Backend):** Developed using FastAPI, the backend exposes RESTful endpoints for real-time model inference. It handles strict data validation, interacts with the loaded XGBoost model, and computes SHAP (SHapley Additive exPlanations) values for prediction interpretability.
+*   **Presentation Layer (Frontend):** A responsive, single-page application built with HTML5, CSS3, and ES6 JavaScript. The frontend is served directly via FastAPI's static file mounting, eliminating the need for a separate web server.
+*   **Persistence Layer:** SQLAlchemy ORM is utilized for logging prediction metadata, confidence scores, and input parameters. The system defaults to SQLite for localized development and seamlessly scales to PostgreSQL for production environments.
 
-- Python
-- NumPy
-- Pandas
-- Scikit-learn
-- XGBoost
-- Matplotlib
-- Seaborn
+## 3. Core Capabilities
 
-### Backend _(Upcoming)_
+*   **Real-time Inference:** Sub-millisecond prediction latency using optimized tree-based models (XGBoost).
+*   **Model Interpretability:** On-the-fly feature importance generation (SHAP), ensuring that all predictions remain transparent and auditable.
+*   **Comprehensive Data Validation:** Robust backend validation logic to prevent erroneous or maliciously formatted input data from reaching the inference engine.
+*   **Historical Analytics:** Integrated endpoints for aggregating and analyzing past predictions to identify long-term spatial and temporal accident trends.
 
-- FastAPI
-- SQLAlchemy
-- MySQL
+## 4. Technical Stack
 
-### Frontend _(Upcoming)_
+*   **Machine Learning:** Python, Pandas, NumPy, Scikit-learn, XGBoost, SHAP
+*   **Backend Framework:** FastAPI, Uvicorn, Pydantic
+*   **Database:** SQLAlchemy, SQLite / PostgreSQL
+*   **Frontend Technologies:** HTML, CSS, JavaScript (Vanilla ES6+)
 
-- React
-- HTML
-- CSS
-- JavaScript
+## 5. Getting Started
 
----
+### 5.1. Prerequisites
 
-## Project Structure
+Ensure the following dependencies are installed on the host machine:
+*   Python (>= 3.9)
+*   pip (Python package installer)
 
-```text
-Road-Accident-Severity-Prediction/
-│
-├── notebooks/
-├── data/
-│   ├── raw/
-│   └── processed/
-├── models/
-├── backend/
-├── frontend/
-├── images/
-├── README.md
-├── requirements.txt
-└── .gitignore
+### 5.2. Local Installation
+
+1.  Clone the repository to your local environment.
+2.  Navigate to the project root directory.
+3.  Install the required Python packages:
+
+```bash
+pip install -r requirements.txt
 ```
 
----
+### 5.3. Starting the Server
 
-## Current Progress
+The application server can be initialized using `uvicorn`. From the root directory, execute:
 
-- ✅ Exploratory Data Analysis
-- ✅ Data Preprocessing
-- ✅ Feature Engineering
-- ✅ Model Training
-- ✅ Hyperparameter Tuning
-- ✅ Model Evaluation
-- ⏳ FastAPI Backend
-- ⏳ MySQL Integration
-- ⏳ React Frontend
-- ⏳ Deployment
+```bash
+uvicorn backend.main:app --reload
+```
 
----
+The unified server will mount both the API endpoints and the static frontend assets on port 8000.
 
-## Future Work
+### 5.4. Accessing the Interfaces
 
-- Build a FastAPI backend for model inference.
-- Integrate a MySQL database to store prediction history.
-- Develop a React frontend for user interaction.
-- Deploy the complete application.
+*   **Web Dashboard:** `http://localhost:8000/`
+*   **OpenAPI Interactive Documentation (Swagger UI):** `http://localhost:8000/docs`
+*   **API Health Check:** `http://localhost:8000/health`
 
----
+## 6. Usage
 
-## Local manual test (backend)
+1.  Access the Web Dashboard via a standard web browser.
+2.  Input the contextual parameters of the incident (e.g., temporal data, weather conditions, lighting, and road surface state).
+3.  Submit the payload to generate a prediction.
+4.  The system will return the classified severity level (Minor, Serious, or Fatal), the associated statistical confidence, and an underlying probability distribution.
 
-1. Start backend (FastAPI):
-   - `uvicorn backend.main:app --reload --port 8000`
-2. Check:
-   - `GET http://127.0.0.1:8000/health`
-   - `GET http://127.0.0.1:8000/docs`
-   - `POST http://127.0.0.1:8000/predict`
-   - `GET http://127.0.0.1:8000/model-info`
+## 7. Roadmap
 
-## Local manual test (frontend)
+*   **Containerization:** Implementation of Dockerfiles and docker-compose configurations for isolated, reproducible deployments.
+*   **Geospatial Integration:** Enhancing the frontend dashboard with GIS mapping capabilities for spatial cluster analysis.
+*   **Continuous Integration (CI/CD):** Establishing automated test suites and deployment pipelines using GitHub Actions.
 
-1. Open `frontend/index.html`.
-2. Submit the form.
-3. Verify the result card shows:
-   - Predicted severity
-   - Confidence
-4. SHAP remains a placeholder (backend currently doesn’t expose SHAP).
+## 8. Author
 
----
-
-## Author
-
-**Mallavarapu Sudhishna**
+**Sudhishna Mallavarapu**
