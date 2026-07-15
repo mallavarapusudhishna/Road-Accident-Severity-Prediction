@@ -10,9 +10,8 @@ notebook
 fastapi
 uvicorn
 sqlalchemy
-pymysql
 python-dotenv
 pydantic
 python-multipart
 psycopg[binary]
-python-multipart
+shap

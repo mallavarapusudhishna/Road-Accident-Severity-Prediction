@@ -31,13 +31,13 @@ An end-to-end Machine Learning project that predicts road accident severity usin
 - Matplotlib
 - Seaborn
 
-### Backend *(Upcoming)*
+### Backend _(Upcoming)_
 
 - FastAPI
 - SQLAlchemy
 - MySQL
 
-### Frontend *(Upcoming)*
+### Frontend _(Upcoming)_
 
 - React
 - HTML
@@ -87,6 +87,27 @@ Road-Accident-Severity-Prediction/
 - Integrate a MySQL database to store prediction history.
 - Develop a React frontend for user interaction.
 - Deploy the complete application.
+
+---
+
+## Local manual test (backend)
+
+1. Start backend (FastAPI):
+   - `uvicorn backend.main:app --reload --port 8000`
+2. Check:
+   - `GET http://127.0.0.1:8000/health`
+   - `GET http://127.0.0.1:8000/docs`
+   - `POST http://127.0.0.1:8000/predict`
+   - `GET http://127.0.0.1:8000/model-info`
+
+## Local manual test (frontend)
+
+1. Open `frontend/index.html`.
+2. Submit the form.
+3. Verify the result card shows:
+   - Predicted severity
+   - Confidence
+4. SHAP remains a placeholder (backend currently doesn’t expose SHAP).
 
 ---
 
