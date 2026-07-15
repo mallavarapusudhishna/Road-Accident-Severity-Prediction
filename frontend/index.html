@@ -1,172 +1,393 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Road Accident Severity Predictor</title>
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <div class="app">
-      <header class="header">
-        <h1>Road Accident Severity Predictor</h1>
-        <p class="subtitle">
-          Enter accident details to predict severity (Minor / Serious / Fatal)
-        </p>
-      </header>
 
-      <section class="card" aria-labelledby="form-title">
-        <h2 id="form-title">Accident details</h2>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AccidentGuard AI — Severity & Risk Analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" href="data:," />
+</head>
 
-        <form id="predict-form" class="form">
-          <div class="grid">
-            <label>
-              State
-              <input
-                name="state"
-                type="text"
-                required
-                placeholder="e.g., Maharashtra"
-              />
-            </label>
+<body>
+  <svg style="display: none">
+    <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    </symbol>
+    <symbol id="icon-activity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+    </symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <polyline points="12 6 12 12 16 14" />
+    </symbol>
+  </svg>
 
-            <label>
-              City
-              <input
-                name="city"
-                type="text"
-                placeholder="e.g., Pune (optional)"
-              />
-            </label>
+  <div class="app-container">
+    <header class="hero-modern">
+      <div class="hero-brand">
+        <svg class="hero-logo" aria-hidden="true">
+          <use href="#icon-shield"></use>
+        </svg>
+        <span class="hero-name">AccidentGuard AI</span>
+      </div>
+      <h1 class="hero-title">Road Accident Severity Prediction</h1>
+      <p class="hero-description">
+        Predict road accident severity using explainable machine learning. Receive confidence scores, SHAP-based
+        explanations, and actionable safety insights in seconds.
+      </p>
+      <div class="hero-badges">
+        <span class="hero-badge">Machine Learning</span>
+        <span class="hero-badge">SHAP Explainability</span>
+        <span class="hero-badge">Real-time Prediction</span>
+      </div>
+    </header>
 
-            <label>
-              Year
-              <input
-                name="year"
-                type="number"
-                min="2018"
-                max="2030"
-                required
-                value="2019"
-              />
-            </label>
+    <div class="single-column">
+      <section class="predictor-card card" aria-label="Accident severity form">
+        <form id="predict-form" class="form-single" novalidate>
+          <div class="form-section">
+            <div class="section-header">
+              <div class="section-title-wrap">
+                <h3>Accident Details</h3>
+                <p class="section-desc">Essential time and location factors.</p>
+              </div>
+            </div>
 
-            <label>
-              Month
-              <input
-                name="month"
-                type="text"
-                required
-                placeholder="e.g., January"
-              />
-            </label>
+            <div class="form-group">
+              <label for="state">Which state did the accident occur in?</label>
+              <select name="state" id="state" required class="a11y-select">
+                <option value="" disabled selected>Select State</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                <option value="Assam">Assam</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Chandigarh">Chandigarh</option>
+                <option value="Chhattisgarh">Chhattisgarh</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Goa">Goa</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Haryana">Haryana</option>
+                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                <option value="Jharkhand">Jharkhand</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Kerala">Kerala</option>
+                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Manipur">Manipur</option>
+                <option value="Meghalaya">Meghalaya</option>
+                <option value="Mizoram">Mizoram</option>
+                <option value="Nagaland">Nagaland</option>
+                <option value="Odisha">Odisha</option>
+                <option value="Puducherry">Puducherry</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Sikkim">Sikkim</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Tripura">Tripura</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="Uttarakhand">Uttarakhand</option>
+                <option value="West Bengal">West Bengal</option>
+              </select>
+            </div>
 
-            <label>
-              Day of Week
-              <input
-                name="day_of_week"
-                type="text"
-                required
-                placeholder="e.g., Monday"
-              />
-            </label>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="accident-date">Date</label>
+                <input type="text" name="accident_date" id="accident-date" placeholder="dd-mm-yyyy" required />
+              </div>
+              <div class="form-group">
+                <label for="accident-time">Time</label>
+                <input type="text" name="accident_time" id="accident-time" placeholder="hh:mm" required />
+              </div>
+            </div>
 
-            <label>
-              Time (HH:MM)
-              <input
-                name="time"
-                type="text"
-                required
-                placeholder="e.g., 18:30"
-              />
-            </label>
-
-            <label>
-              Vehicle Type
-              <input
-                name="vehicle_type"
-                type="text"
-                required
-                placeholder="e.g., Two-Wheeler"
-              />
-            </label>
-
-            <label>
-              Driver Age
-              <input
-                name="driver_age"
-                type="number"
-                min="16"
-                max="100"
-                required
-                value="35"
-              />
-            </label>
-
-            <label>
-              Speed Limit (km/h)
-              <input
-                name="speed_limit_kmh"
-                type="number"
-                min="0"
-                required
-                value="60"
-              />
-            </label>
-
-            <label>
-              Alcohol Involved
-              <input
-                name="alcohol_involved"
-                type="text"
-                required
-                placeholder="e.g., Yes"
-              />
-            </label>
+            <div class="form-group">
+              <label for="num_vehicles">Vehicles Involved</label>
+              <input type="number" name="num_vehicles" id="num_vehicles" min="1" max="10" placeholder="Enter number of vehicles" required />
+            </div>
           </div>
 
-          <div class="actions">
-            <button type="submit" id="predict-btn">Predict Severity</button>
-            <button type="button" id="clear-btn" class="secondary">
-              Clear
+          <div class="form-section">
+            <div class="section-header">
+              <div class="section-title-wrap">
+                <h3>Road Conditions</h3>
+                <p class="section-desc">Environmental and structural road characteristics.</p>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="road_type">What type of road was involved?</label>
+                <select name="road_type" id="road_type" required class="a11y-select">
+                  <option value="" disabled selected>Select Road Type</option>
+                  <option value="National Highway">National Highway</option>
+                  <option value="State Highway">State Highway</option>
+                  <option value="Urban Road">Urban Road</option>
+                  <option value="Village Road">Village Road</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="accident_location_details">Road Layout</label>
+                <select name="accident_location_details" id="accident_location_details" required class="a11y-select">
+                  <option value="" disabled selected>Select Road Layout</option>
+                  <option value="Straight Road">Straight Road</option>
+                  <option value="Curve">Curve / Bend</option>
+                  <option value="Intersection">Intersection / Junction</option>
+                  <option value="Bridge">Bridge / Flyover</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="road_condition">How was the road surface?</label>
+                <select name="road_condition" id="road_condition" required class="a11y-select">
+                  <option value="" disabled selected>Select Road Condition</option>
+                  <option value="Dry">Dry & Clean</option>
+                  <option value="Wet">Wet / Slick</option>
+                  <option value="Damaged">Damaged / Potholes</option>
+                  <option value="Under Construction">Under Construction</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="weather">What was the weather like during the accident?</label>
+                <select name="weather" id="weather" required class="a11y-select">
+                  <option value="" disabled selected>Select Weather Condition</option>
+                  <option value="Clear">Clear</option>
+                  <option value="Rainy">Rainy</option>
+                  <option value="Stormy">Stormy / High Winds</option>
+                  <option value="Foggy">Foggy</option>
+                  <option value="Hazy">Hazy / Smog</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="lighting_conditions">What were the lighting conditions?</label>
+                <select name="lighting_conditions" id="lighting_conditions" required class="a11y-select">
+                  <option value="" disabled selected>Select Lighting Condition</option>
+                  <option value="Daylight">Daylight</option>
+                  <option value="Dark">Complete Dark (No streetlights)</option>
+                  <option value="Dusk">Dusk (Twilight)</option>
+                  <option value="Dawn">Dawn (Early morning)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="traffic_control_presence">Was any traffic control present?</label>
+                <select name="traffic_control_presence" id="traffic_control_presence" required class="a11y-select">
+                  <option value="" disabled selected>Select Traffic Control</option>
+                  <option value="Signs">Traffic Signs Only</option>
+                  <option value="Signals">Electronic Traffic Signals</option>
+                  <option value="Police Checkpost">Police Checkpost / Guard</option>
+                  <option value="None">No Traffic Control / No Signal</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="section-header">
+              <div class="section-title-wrap">
+                <h3>Driver Information</h3>
+                <p class="section-desc">Vehicle and driver-specific parameters.</p>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="vehicle_type">What type of vehicle was involved?</label>
+                <select name="vehicle_type" id="vehicle_type" required class="a11y-select">
+                  <option value="" disabled selected>Select Vehicle Type</option>
+                  <option value="Car">Car</option>
+                  <option value="Truck">Truck</option>
+                  <option value="Two-Wheeler">Two-Wheeler</option>
+                  <option value="Cycle">Cycle</option>
+                  <option value="Bus">Bus</option>
+                  <option value="Auto-Rickshaw">Auto-Rickshaw</option>
+                  <option value="Pedestrian">Pedestrian</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="speed_limit_kmh">What was the speed limit at that location?</label>
+                <div class="slider-wrapper">
+                  <input type="range" name="speed_limit_kmh" id="speed_limit_kmh" min="30" max="120" step="10"
+                    value="60" />
+                  <div id="speed-limit-tooltip" class="range-tooltip" hidden>
+                    <span id="speed-limit-tooltip-value">60</span> km/h
+                  </div>
+                  <div class="slider-ticks">
+                    <span>30</span><span>60</span><span>90</span><span>120</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="age-question">
+                <div class="age-question-label">Approximately how old was the driver?</div>
+                <div class="age-badge" aria-live="polite">
+                  Age: <span id="driver-age-badge">35</span> Years
+                </div>
+              </div>
+
+              <div class="slider-wrapper">
+                <input type="range" name="driver_age" id="driver_age" min="16" max="90" value="35" />
+                <div id="driver-age-tooltip" class="range-tooltip" hidden>
+                  <span id="driver-age-tooltip-value">35</span>
+                </div>
+
+                <div class="slider-ticks only-ends">
+                  <span>16</span><span>90</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="driver_license_status">What was the driver's license status?</label>
+                <select name="driver_license_status" id="driver_license_status" required class="a11y-select">
+                  <option value="" disabled selected>Select License Status</option>
+                  <option value="Valid">Valid</option>
+                  <option value="Expired">Expired</option>
+                  <option value="Unknown">Unknown</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="alcohol_involved_check">Was alcohol suspected to be involved?</label>
+                <div class="toggle-switch">
+                  <input type="checkbox" id="alcohol_involved_check" />
+                  <label for="alcohol_involved_check" class="toggle-slider"></label>
+                  <span class="toggle-label" id="alcohol-label">No</span>
+                </div>
+                <span class="helper-text">Toggle if alcohol was suspected.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="wizard-actions">
+            <button type="submit" id="predict-btn" class="btn primary" aria-label="Predict severity">
+              Predict Accident Severity
+            </button>
+            <button type="button" id="clear-btn" class="btn text-link">
+              Reset
             </button>
           </div>
         </form>
       </section>
 
-      <section
-        class="card result-card is-hidden"
-        aria-live="polite"
-        id="result-card"
-      >
-        <h2 id="result-heading" class="result-heading">Prediction result</h2>
-
-        <div id="status" class="status" role="status" aria-live="polite"></div>
-
-        <div id="result" class="result" aria-hidden="true">
-          <div class="result-row">
-            <span class="label">Predicted severity</span>
-            <span id="predicted-severity" class="value"></span>
+      <div class="results-below">
+        <div id="loader-card" class="card is-hidden" role="status" aria-live="polite">
+          <div class="loader-content">
+            <div class="spinner" aria-hidden="true">
+              <div class="double-bounce1"></div>
+              <div class="double-bounce2"></div>
+            </div>
+            <h3>Analyzing accident profile…</h3>
+            <p>Running prediction and SHAP explainability.</p>
           </div>
-          <div class="result-row">
-            <span class="label">Confidence</span>
-            <span id="confidence" class="value"></span>
+        </div>
+
+        <section id="result-card" class="card result-card is-hidden" aria-label="Prediction result">
+          <div class="result-header">
+            <div>
+              <span id="risk-badge" class="badge">—</span>
+              <h2 id="result-heading">—</h2>
+            </div>
+            <div class="confidence-circle-wrapper">
+              <div class="confidence-gauge">
+                <svg viewBox="0 0 36 36" class="circular-chart" aria-hidden="true">
+                  <path class="circle-bg"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path class="circle" id="confidence-bar" stroke-dasharray="0, 100"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <text x="18" y="18" class="percentage" id="confidence-percentage">
+                    0%
+                  </text>
+                </svg>
+              </div>
+              <span class="confidence-label">Confidence</span>
+            </div>
           </div>
 
           <div class="divider"></div>
-          <h3>Reason of accident</h3>
-          <p class="muted" id="shap-note">
-            SHAP explanation will appear here after prediction.
-          </p>
-          <div id="shap-container" class="shap-container">
-            <div id="shap-content" class="shap-placeholder">
-              SHAP explanation is not available yet from the backend.
+
+          <div class="probability-chart-section">
+            <h3>Probability Distribution</h3>
+            <div class="prob-bar-container">
+              <div class="prob-row">
+                <span class="prob-label">Fatal</span>
+                <div class="prob-bar-track">
+                  <div class="prob-bar-fill dist-fatal" id="prob-fill-fatal" style="width: 0%"></div>
+                </div>
+                <span class="prob-value" id="prob-val-fatal">0%</span>
+              </div>
+              <div class="prob-row">
+                <span class="prob-label">Serious</span>
+                <div class="prob-bar-track">
+                  <div class="prob-bar-fill dist-serious" id="prob-fill-serious" style="width: 0%"></div>
+                </div>
+                <span class="prob-value" id="prob-val-serious">0%</span>
+              </div>
+              <div class="prob-row">
+                <span class="prob-label">Minor</span>
+                <div class="prob-bar-track">
+                  <div class="prob-bar-fill dist-minor" id="prob-fill-minor" style="width: 0%"></div>
+                </div>
+                <span class="prob-value" id="prob-val-minor">0%</span>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    </div>
 
-    <script src="./app.js"></script>
-  </body>
+          <div class="divider"></div>
+
+          <div class="shap-section">
+            <h3>Top Contributing Factors (SHAP)</h3>
+            <p class="shap-subtext">
+              Only active factors are shown. These are the strongest
+              contributors for this exact input.
+            </p>
+            <div id="shap-bar-container" class="shap-bar-container"></div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="explanation-section">
+            <svg class="explanation-icon" aria-hidden="true">
+              <use href="#icon-activity"></use>
+            </svg>
+            <div class="explanation-text-wrapper">
+              <h4>AI Accident Assessment Report</h4>
+              <p id="shap-explanation">Explanation loading…</p>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="result-footer">
+            <span class="timestamp-label">Prediction timestamp</span>
+            <span id="prediction-timestamp" class="timestamp-value">—</span>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script src="./dropdown.js"></script>
+  <script src="./app.js"></script>
+</body>
+
 </html>
