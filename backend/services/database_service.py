@@ -1,53 +1,37 @@
 from __future__ import annotations
 
 import json
+import logging
 
-from backend.database import session
+from backend.database import session as db_session
 from backend.database.models import AccidentRecord, PredictionRecord
 from backend.models.schemas import PredictionRequest
 
-
-def _derive_time_of_day(accident_hour: int) -> str:
-    if 0 <= accident_hour < 5:
-        return "Late Night"
-    if 5 <= accident_hour < 12:
-        return "Morning"
-    if 12 <= accident_hour < 17:
-        return "Afternoon"
-    return "Evening"
+logger = logging.getLogger(__name__)
 
 
-def _driver_age_group(driver_age: int) -> str:
-    if driver_age < 25:
-        return "Young"
-    if driver_age <= 60:
-        return "Adult"
-    return "Senior"
+def save_prediction_records(
+    payload: PredictionRequest,
+    predicted_severity: str,
+    confidence: float,
+    derived_fields: dict,
+) -> None:
+    """Persist accident and prediction records.
 
+    This is a **best-effort** operation.  If the database is unavailable the
+    prediction response is still returned to the caller — the error is logged
+    but not re-raised.
 
-def _build_derived_fields(payload: PredictionRequest) -> dict:
-    import pandas as pd
-
-    accident_hour = pd.to_datetime(payload.time, format="%H:%M", errors="coerce").hour
-    if pd.isna(accident_hour):
-        raise ValueError("time must be a valid HH:MM value")
-
-    return {
-        "accident_hour": int(accident_hour),
-        "time_of_day": _derive_time_of_day(int(accident_hour)),
-        "driver_age_group": _driver_age_group(int(payload.driver_age)),
-        "is_multi_vehicle": "Yes" if int(payload.num_vehicles) > 1 else "No",
-        "is_weekend": "Yes" if payload.day_of_week in {"Saturday", "Sunday"} else "No",
-        "is_night": "Yes" if int(accident_hour) >= 20 or int(accident_hour) < 6 else "No",
-        "is_peak_hour": "Yes" if 7 <= int(accident_hour) <= 10 or 17 <= int(accident_hour) <= 20 else "No",
-    }
-
-
-def save_prediction_records(payload: PredictionRequest, predicted_severity: str, confidence: float) -> None:
-    session.init_db()
-    db = session.SessionLocal()
+    Parameters
+    ----------
+    derived_fields
+        Pre-computed derived fields from predict_from_request().
+        Passed in to avoid a redundant build_derived_fields() call.
+    """
+    db = None
     try:
-        derived_fields = _build_derived_fields(payload)
+        db = db_session.SessionLocal()
+
         accident_record = AccidentRecord(
             state=payload.state,
             city=payload.city,
@@ -88,5 +72,17 @@ def save_prediction_records(payload: PredictionRequest, predicted_severity: str,
         db.add(accident_record)
         db.add(prediction_record)
         db.commit()
+    except Exception:
+        if db is not None:
+            try:
+                db.rollback()
+            except Exception:
+                pass
+        logger.exception("Failed to persist prediction records to database")
+        # Best-effort: do NOT re-raise — the prediction result is still valid.
     finally:
-        db.close()
+        if db is not None:
+            try:
+                db.close()
+            except Exception:
+                pass

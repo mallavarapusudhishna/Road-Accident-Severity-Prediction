@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
 import joblib
@@ -13,17 +12,16 @@ FEATURE_NAMES_PATH = ROOT / "models" / "feature_names.pkl"
 MODEL_COMPARISON_PATH = ROOT / "models" / "model_comparison.csv"
 MODEL_IMPROVEMENT_PATH = ROOT / "models" / "model_improvement_results.csv"
 
+# ---------------------------------------------------------------------------
+# Cached metadata — populated once by load_model_metadata() on first call.
+# ---------------------------------------------------------------------------
+_CACHED_METADATA: dict | None = None
+
 
 def load_model() -> object:
     if not MODEL_PATH.exists():
         raise FileNotFoundError(f"Model artifact missing at {MODEL_PATH}")
     return joblib.load(MODEL_PATH)
-
-
-def load_preprocessor() -> object:
-    if not PREPROCESSOR_PATH.exists():
-        raise FileNotFoundError(f"Preprocessor artifact missing at {PREPROCESSOR_PATH}")
-    return joblib.load(PREPROCESSOR_PATH)
 
 
 def load_feature_names() -> list[str]:
@@ -33,12 +31,22 @@ def load_feature_names() -> list[str]:
 
 
 def load_model_metadata() -> dict:
+    """Return model metadata.
+
+    The metadata is cached after the first call because all underlying
+    artifacts (model file, CSVs, feature names) are static training outputs
+    that never change at runtime.
+    """
+    global _CACHED_METADATA
+    if _CACHED_METADATA is not None:
+        return _CACHED_METADATA
+
     model = load_model()
     feature_names = load_feature_names()
     model_comparison = pd.read_csv(MODEL_COMPARISON_PATH)
     model_improvement = pd.read_csv(MODEL_IMPROVEMENT_PATH)
 
-    return {
+    _CACHED_METADATA = {
         "model_path": str(MODEL_PATH.relative_to(ROOT)),
         "preprocessor_path": str(PREPROCESSOR_PATH.relative_to(ROOT)),
         "feature_names_count": len(feature_names),
@@ -53,3 +61,4 @@ def load_model_metadata() -> dict:
             2: "Fatal",
         },
     }
+    return _CACHED_METADATA
